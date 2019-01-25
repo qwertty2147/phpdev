@@ -1,3 +1,4 @@
+<?php require 'connectDB.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,6 +116,29 @@ li a:hover {
 .clear{
   clear:both;
 }
+#tab {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tab td, #tab th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tab tr:nth-child(even){background-color: #f2f2f2;}
+
+#tab tr:hover {background-color: #ffeaa7;}
+
+#tab th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2d3436;
+  color: white;
+}
+
 </style>
 </head>
 
@@ -125,49 +149,51 @@ li a:hover {
   <?php include 'layout/navbar.php'?>
   
   <article>
-  <form action="regis_addDB.php" method="post">
-    <h2>Register</h2>
-    <table>
-      <tr>
-        <td>Username:</td>
-        <td> <input type="text" name="usrname" required></td>
-        <td>Gender:</td>
-        <td><input type="radio" class="type" name="gender" value="male" checked>
-            <input type="radio" class="type" name="gender"value="female">
-        </td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td><input type="password" name="pwdword" required></td>
-        <td>Age:</td>
-        <td><select  name="age">
-        <option value="1-10">1-10</option>
-        <option value="11-20">11-20</option>
-        <option value="21-30">21-30</option>
-        <option value="31-40">31-40</option>
-        <option value="41-50">41-50</option></td>
-      </tr>
-      <tr>
-        <td>Fullname:</td>
-        <td><input type="text" name="fullname" required></td>
-        <td>Address:</td>
-        <td><textarea name="address" rows="10" cols="30"></textarea></td>
-      </tr>
-      <tr>
-        <td>Hobbies: </td>
-        <td colspan="4">
-    <input type="checkbox" name="hobbies0" value="Sport"> Sport
-    <input type="checkbox" name="hobbies1" value="Reading"> Reading
-    <input type="checkbox" name="hobbies2" value="Traveling"> Traveling
-    <input type="checkbox" name="hobbies3" value="Play game"> Play game</td>
-      </tr>
+  <h2>Member List</h2><br>
+    <hr>
+    <?php 
+  //select data from table
+    $sql = "SELECT * FROM member";
+    $query = $conn->query($sql);
+    $row = $query->num_rows;
+    
+    
+  ?>
+    <table id="tab">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Fullname</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Hobbies</th>
+            <th>Manage</th>
+        </tr><?php #endregion
+        while ($getData = $query->fetch_assoc()){
+            $id= $getData['id'];
+            $username =$getData['username'];
+            $fullname =$getData['fullname'];
+            $gender =$getData['gender'];
+            $age = $getData['age'];
+            $address=$getData['address'];
+            $hobbies=$getData['hobbies'];?>
+        <tr>
+            <td><?php echo $id?></td>
+            <td><?php echo $username?></td>
+            <td><?php echo $fullname?></td>
+            <td><?php echo $gender?></td>
+            <td><?php echo $age?></td>
+            <td><?php echo $address?></td>
+            <td><?php echo $hobbies?></td>
+            <td>
+                <a href="">Edit</a>
+                <a href="">Remove</a>
+            </td>
+            
+        </tr>
+        <?php } ?>
     </table>
-   
-
-  <input type="submit">
-  <input type="reset">
-  <div class="clear"></div>
-    </form>
     
     <div id="show">
     
