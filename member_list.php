@@ -169,7 +169,7 @@ li a:hover {
             <th>Address</th>
             <th>Hobbies</th>
             <th>Manage</th>
-        </tr><?php #endregion
+        </tr><?php 
         while ($getData = $query->fetch_assoc()){
             $id= $getData['id'];
             $username =$getData['username'];
@@ -187,8 +187,8 @@ li a:hover {
             <td><?php echo $address?></td>
             <td><?php echo $hobbies?></td>
             <td>
-                <a href="">Edit</a>
-                <a href="">Remove</a>
+                <a href="edit.php">Edit</a>
+                <a href="remove.php">Remove</a>
             </td>
             
         </tr>
