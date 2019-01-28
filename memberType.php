@@ -147,69 +147,60 @@ li a:hover {
 <?php include 'layout/sidemenu.php'?>
 <section >
   <?php include 'layout/navbar.php'?>
-  <?php 
-  //select data from table
-  $idEdit=$_GET["id"];
- 
-  $SQL= "SELECT * FROM member WHERE id=$idEdit";
   
-      $query = $conn->query($SQL);
-      $getData = $query->fetch_assoc();
-          $id=$getData['id'];
-          $username =$getData['username'];
-          $fullname =$getData['fullname'];
-          $gender =$getData['gender'];
-          $age = $getData['age'];
-          $address=$getData['address'];
-          $hobbies=$getData['hobbies']; 
-       ?>
   <article>
-  <form action="updateMember.php?id=<?php echo $idEdit?>" method="post">
-  <h2>Edit member<?php "id =" .$idEdit;?></h2><br>
+  <h2>Member Type</h2><br>
     <hr>
-   
-    <table>
+    <?php 
+  //select data from table
+    $sql = "SELECT * FROM member_type";
+    $query = $conn->query($sql);
+    $row = $query->num_rows;
     
-      <tr>
-        <td>Username:</td>
-        <td> <input type="text" name="username" value="<?php echo $username;?>" ></td>
-        <td>Gender:</td>
-        <td><input type="radio" class="type" name="gender" value="male" checked>
-            <input type="radio" class="type" name="gender"value="female">
-        </td>
-      </tr>
-      <tr>
-        <td>Password:</td>
-        <td><input type="password" name="password" required></td>
-        <td>Age:</td>
-        <td><select  name="age">
-        <option value="1-10">1-10</option>
-        <option value="11-20">11-20</option>
-        <option value="21-30">21-30</option>
-        <option value="31-40">31-40</option>
-        <option value="41-50">41-50</option></td>
-      </tr>
-      <tr>
-        <td>Fullname:</td>
-        <td><input type="text" name="fullname" value="<?php echo  $fullname;?>"required></td>
-        <td>Address:</td>
-        <td><textarea name="address" rows="10" cols="30" value="<?php echo  $address;?>"></textarea></td>
-      </tr>
-      <tr>
-        <td>Hobbies: </td>
-        <td colspan="4">
-    <input type="checkbox" name="hobbies0" value="Sport"> Sport
-    <input type="checkbox" name="hobbies1" value="Reading"> Reading
-    <input type="checkbox" name="hobbies2" value="Traveling"> Traveling
-    <input type="checkbox" name="hobbies3" value="Play game"> Play game</td>
-      </tr>
+    
+  ?>
+    <table id="tab">
+        <tr>
+            <th>Type ID</th>
+            <th>Type Name</th>
+            <th>Type Note</th>
+            <th>Manage</th>
+        </tr><?php 
+        while ($getData = $query->fetch_assoc()){
+            $typeId= $getData['type_id'];
+            $typeName =$getData['type_name'];
+            $typeNote =$getData['type_note'];
+            ?>
+        <tr>
+            <td><?php echo $typeId?></td>
+            <td><?php echo $typeName?></td>
+            <td><?php echo $typeNote?></td>
+            <td>
+                <a href="edit.php?id=<?php echo $id ?>">Edit</a>
+                <a href="remove.php?id=<?php echo $id ?>">Remove</a>
+            </td>
+            
+        </tr>
+        <?php } ?>
     </table>
 
-    <input type="submit" value="update">
-    <input type="button" href="member_list.php" value="Back">
+    <button onclick="myFunction()">Add Type</button>
+
+<script>
+function myFunction() {
+    window.open("addMemberType.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
+}
+</script>
     
-    <div id="show"></div>
-  </form>
+    <div id="show">
+    
+  
+  
+  
+  
+  
+  
+  </div>
   </article>
   <div class="clear"></div>
 </section>

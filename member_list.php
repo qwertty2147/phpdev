@@ -168,6 +168,7 @@ li a:hover {
             <th>Age</th>
             <th>Address</th>
             <th>Hobbies</th>
+            <th>Member Type</th>
             <th>Manage</th>
         </tr><?php 
         while ($getData = $query->fetch_assoc()){
@@ -186,9 +187,10 @@ li a:hover {
             <td><?php echo $age?></td>
             <td><?php echo $address?></td>
             <td><?php echo $hobbies?></td>
+            <td></td>
             <td>
-                <a href="edit.php">Edit</a>
-                <a href="remove.php">Remove</a>
+                <a href="edit.php?id=<?php echo $id ?>">Edit</a>
+                <a href="remove.php?id=<?php echo $id ?>">Remove</a>
             </td>
             
         </tr>

@@ -21,7 +21,7 @@
 
         if($conn->query($SQL)){
             echo "INSERT DATA SUCCESSFUL";
-            echo "<br> <a href='member_list.php'> Show Member List </a>"
+            echo "<br> <a href='member_list.php'> Show Member List </a>";
         }
         else{
             echo "FAILED".$conn->error();

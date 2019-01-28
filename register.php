@@ -150,6 +150,17 @@ li a:hover {
       <tr>
         <td>Fullname:</td>
         <td><input type="text" name="fullname" required></td>
+        <td>Member Type:</td>
+        <td>
+        <select name="member type">
+        <option value="supervip">super vip</option>
+        <option value="vip">vip</option>
+        <option value="good">good</option>
+        <option value="normal">normal</option>
+        <option value="danger">danger</option>
+        </td>
+        </tr>
+        <tr>
         <td>Address:</td>
         <td><textarea name="address" rows="10" cols="30"></textarea></td>
       </tr>
@@ -161,22 +172,19 @@ li a:hover {
     <input type="checkbox" name="hobbies2" value="Traveling"> Traveling
     <input type="checkbox" name="hobbies3" value="Play game"> Play game</td>
       </tr>
+      <tr>
+        
+      </tr>
     </table>
    
 
-  <input type="submit">
-  <input type="reset">
+  <input type="submit" >
+  <input type="reset" >
   <div class="clear"></div>
     </form>
     
     <div id="show">
-    
-  
-  
-  
-  
-  
-  
+
   </div>
   </article>
   <div class="clear"></div>
