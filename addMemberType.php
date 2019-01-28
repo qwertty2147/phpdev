@@ -11,7 +11,7 @@
 </head>
 <body>
 <article>
-<form action="addMemberTypes.php" method="post">
+<form action="insert_memberType.php" method="post">
   <h2>Add Member Type</h2><br>
     <hr>
    <table>
@@ -26,31 +26,7 @@
       
     </table>
 
-    <?php 
-$typeName = $_POST["memberTypeName"];
-$typeNote = $_POST["typeNote"];
-    if($typeName!=""){
-        
-       
 
-        $SQL = "INSERT INTO member_type (type_name,type_note)
-                        VALUES ('$typeName','$typeNote')" ;
-
-         echo "if success" ;
-
-        if($conn->query($SQL)){
-            echo "Add Type SUCCESSFUL";
-            echo "<br> <a href='memberType.php'> Show Member Type </a>";
-        }
-        else{
-            echo "FAILED".$conn->error();
-        }
-    }else{
-        echo "please fill empty info";
-    }
-
-    
-?>
     <input type="submit" >
   <input type="reset" >
   <div class="clear"></div>
