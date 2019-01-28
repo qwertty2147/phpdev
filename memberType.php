@@ -170,37 +170,22 @@ li a:hover {
             $typeId= $getData['type_id'];
             $typeName =$getData['type_name'];
             $typeNote =$getData['type_note'];
+            
             ?>
+            
         <tr>
             <td><?php echo $typeId?></td>
             <td><?php echo $typeName?></td>
             <td><?php echo $typeNote?></td>
             <td>
-                <a href="edit.php?id=<?php echo $id ?>">Edit</a>
-                <a href="remove.php?id=<?php echo $id ?>">Remove</a>
+            <button onclick="edit(<?php echo $typeId?>)">Add Type</button>
+            <button onclick="remove(<?php echo $typeId?>)">Remove</button>
             </td>
             
         </tr>
         <?php } ?>
     </table>
 
-    <button onclick="myFunction()">Add Type</button>
-
-<script>
-function myFunction() {
-    window.open("addMemberType.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
-}
-</script>
-    
-    <div id="show">
-    
-  
-  
-  
-  
-  
-  
-  </div>
   </article>
   <div class="clear"></div>
 </section>
@@ -208,4 +193,23 @@ function myFunction() {
    
     
 </body>
+<script>
+                function edit(typeId) {
+                 window.open("edit_memberType.php?id="+typeId,"",
+                  "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
+                }
+                function remove(typeId){
+                    if(confirm("Do you want to remove this type? "+typeId," "))
+                        {
+                            window.open("remove_memberType.php?id="+typeId,"",
+                                "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
+                            return true;
+    
+                        }
+                    else
+                        {
+                            return false;
+                        }
+                }
+            </script>
 </html>

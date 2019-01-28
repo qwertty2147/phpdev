@@ -14,17 +14,17 @@
   //select data from table
   $idEdit=$_GET["id"];
  
-  $SQL= "SELECT * FROM member_type WHERE id=$idEdit";
-  
+  $SQL= "SELECT * FROM member_type WHERE type_id=$idEdit";
+
       $query = $conn->query($SQL);
       $getData = $query->fetch_assoc();
-          
+          $typeId= $getData['type_id'];
           $typeName =$getData['type_name'];
           $typeNote =$getData['type_note'];
           
        ?>
 <article>
-<form action="update_memberType.php" method="post">
+<form action="update_memberType.php?id=<?php echo $typeId ?>" method="post">
   <h2>Edit Member Type</h2><br>
     <hr>
     
