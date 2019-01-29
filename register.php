@@ -1,3 +1,4 @@
+<?php require 'connectDB.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +128,7 @@ li a:hover {
   <article>
   <form action="regis_addDB.php" method="post">
     <h2>Register</h2>
+   
     <table>
       <tr>
         <td>Username:</td>
@@ -152,13 +154,23 @@ li a:hover {
         <td><input type="text" name="fullname" required></td>
         <td>Member Type:</td>
         <td>
-        <select name="member type">
-        <option value="supervip">super vip</option>
-        <option value="vip">vip</option>
-        <option value="good">good</option>
-        <option value="normal">normal</option>
-        <option value="danger">danger</option>
+        <select name="memberType" >
+        <?php 
+         //select data from table
+           $sql = "SELECT * FROM member_type";
+           $query = $conn->query($sql);
+           $row = $query->num_rows;
+           
+       
+        while ($getData = $query->fetch_assoc()){
+            $typeId=$getData['type_id'];
+            $typeName=$getData['type_name'];
+          ?>
+        <option value="<?php echo $typeId?>"><?php echo $typeName ?></option>
+        <?php } ?>
+        </select>
         </td>
+        
         </tr>
         <tr>
         <td>Address:</td>

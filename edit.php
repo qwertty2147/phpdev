@@ -162,6 +162,11 @@ li a:hover {
           $age = $getData['age'];
           $address=$getData['address'];
           $hobbies=$getData['hobbies']; 
+          $typeIdGet= $getData['type_id'];
+
+          $explode = explode(",", $hobbies);
+          
+          
        ?>
   <article>
   <form action="updateMember.php?id=<?php echo $idEdit?>" method="post">
@@ -174,8 +179,8 @@ li a:hover {
         <td>Username:</td>
         <td> <input type="text" name="username" value="<?php echo $username;?>" ></td>
         <td>Gender:</td>
-        <td><input type="radio" class="type" name="gender" value="male" checked>
-            <input type="radio" class="type" name="gender"value="female">
+        <td><input type="radio" class="type" name="gender" value="male" <?php if('male'==$gender){ echo "checked";} ?>>Male
+            <input type="radio" class="type" name="gender"value="female" <?php if('female'==$gender){ echo "checked";} ?>>Female
         </td>
       </tr>
       <tr>
@@ -192,16 +197,37 @@ li a:hover {
       <tr>
         <td>Fullname:</td>
         <td><input type="text" name="fullname" value="<?php echo  $fullname;?>"required></td>
+        <td><select name="memberType" >
+        <?php 
+         //select data from table
+           $sql = "SELECT * FROM member_type";
+           $query = $conn->query($sql);
+           $row = $query->num_rows;
+           
+       
+        while ($getData = $query->fetch_assoc()){
+            $typeID=$getData['type_id'];
+            $typeName=$getData['type_name'];
+          ?>
+        <option <?php if ($typeIdGet == $typeID) {
+          echo "selected";
+        }?>value="<?php echo $typeID?>"><?php echo $typeName ?></option>
+        <?php } ?>
+        </select>
+      </td>
+      </tr>
+
+      <tr>
         <td>Address:</td>
         <td><textarea name="address" rows="10" cols="30" value="<?php echo  $address;?>"></textarea></td>
       </tr>
       <tr>
         <td>Hobbies: </td>
         <td colspan="4">
-    <input type="checkbox" name="hobbies0" value="Sport"> Sport
-    <input type="checkbox" name="hobbies1" value="Reading"> Reading
-    <input type="checkbox" name="hobbies2" value="Traveling"> Traveling
-    <input type="checkbox" name="hobbies3" value="Play game"> Play game</td>
+    <input type="checkbox" name="hobbies0" value="Sport" <?php if ($explode[0] == "Sport") { echo "checked"; }?> > Sport
+    <input type="checkbox" name="hobbies1" value="Reading" <?php if ($explode[1]== 'Reading') {echo "checked";}?>> Reading
+    <input type="checkbox" name="hobbies2" value="Traveling" <?php if ($explode[2]== 'Traveling'){echo "checked";} ?>> Traveling
+    <input type="checkbox" name="hobbies3" value="Play game" <?php if ($explode[3]== 'Play game') {echo "checked";}?>> Play game</td>
       </tr>
     </table>
 

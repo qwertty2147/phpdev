@@ -1,10 +1,10 @@
-<?php session_start(); require 'connectDB.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>form</title>
+    <title>login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -143,74 +143,41 @@ li a:hover {
 </head>
 
 <body>
-<?PHP include 'login/Auth.php'?>
-<?php include 'layout/header.php'?>
-<?php include 'layout/sidemenu.php'?>
+<?php include '../layout/header.php'?>
+<?php include '../layout/sidemenu.php'?>
 <section >
-  <?php include 'layout/navbar.php'?>
+  <?php include '../layout/navbar.php'?>
   
   <article>
-  <h2>Member Type</h2><br>
+  <form action="login_check.php" method="post">
+  <h2>Login</h2><br>
     <hr>
-    <?php 
-  //select data from table
-    $sql = "SELECT * FROM member_type";
-    $query = $conn->query($sql);
-    $row = $query->num_rows;
-    
-    
-  ?>
-    <table id="tab">
-        <tr>
-            <th>Type ID</th>
-            <th>Type Name</th>
-            <th>Type Note</th>
-            <th>Manage</th>
-        </tr><?php 
-        while ($getData = $query->fetch_assoc()){
-            $typeId= $getData['type_id'];
-            $typeName =$getData['type_name'];
-            $typeNote =$getData['type_note'];
-            
-            ?>
-            
-        <tr>
-            <td><?php echo $typeId?></td>
-            <td><?php echo $typeName?></td>
-            <td><?php echo $typeNote?></td>
-            <td>
-            
-            <button onclick="remove(<?php echo $typeId?>)">Remove</button>
-            </td>
-            
-        </tr>
-        <?php } ?>
+    <table>
+      <tr>
+        <td>Username:</td>
+        <td> <input type="text" name="username" required></td>
+       
+      </tr>
+      <tr>
+        <td>Password:</td>
+        <td><input type="password" name="pwdword" required></td>
+        
+      </tr>
+     
+      
+      
     </table>
-    <button onclick="edit(<?php echo $typeId?>)">Add Type</button>
+
+   
+    <input type="submit" name="submit" value="Login">
+    
+    <div class="clear"></div>
+  </form>
   </article>
-  <div class="clear"></div>
+
 </section>
   
    
     
 </body>
-<script>
-                function edit(typeId) {
-                 window.open("edit_memberType.php?id="+typeId,"",
-                  "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
-                }
-                function remove(typeId){
-                    if(confirm("Do you want to remove this type? "+typeId," "))
-                        {
-                            window.open("remove_memberType.php?id="+typeId,"",
-                                "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=400,left=300,width=400,height=300");
-                            return true;
-    
-                        }
-                    else
-                        {
-                            return false;
-                        }
-                }
-            </script>
 </html>

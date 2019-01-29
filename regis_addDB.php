@@ -11,11 +11,13 @@
         $hobbies1 = $_POST["hobbies1"];
         $hobbies2 = $_POST["hobbies2"];
         $hobbies3 = $_POST["hobbies3"];
+        $memberType = $_POST["memberType"];
+        
 
         $hobbies = $hobbies0." , ".$hobbies1." , ".$hobbies2." , ".$hobbies3;
 
-        $SQL = "INSERT INTO member (username,password,gender,age,fullname,address,hobbies)
-                        VALUES ('$usrname',md5('$pwdword'),'$gender','$age','$fullname','$address','$hobbies')" ;
+        $SQL = "INSERT INTO member (username,password,gender,age,fullname,address,hobbies,type_id)
+                        VALUES ('$usrname',md5('$pwdword'),'$gender','$age','$fullname','$address','$hobbies','$memberType')" ;
 
         // echo $SQL ;
 

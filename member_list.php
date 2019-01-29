@@ -1,4 +1,6 @@
-<?php require 'connectDB.php'; ?>
+<?php session_start();
+echo $_SESSION["status"];
+require 'connectDB.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,6 +145,7 @@ li a:hover {
 </head>
 
 <body>
+<?PHP include 'login/Auth.php'?>
 <?php include 'layout/header.php'?>
 <?php include 'layout/sidemenu.php'?>
 <section >
@@ -153,7 +156,7 @@ li a:hover {
     <hr>
     <?php 
   //select data from table
-    $sql = "SELECT * FROM member";
+    $sql= "SELECT member.*,member_type.type_name FROM member LEFT JOIN member_type ON (member.type_id = member_type.type_id) LIMIT 10 ";
     $query = $conn->query($sql);
     $row = $query->num_rows;
     
@@ -178,7 +181,8 @@ li a:hover {
             $gender =$getData['gender'];
             $age = $getData['age'];
             $address=$getData['address'];
-            $hobbies=$getData['hobbies'];?>
+            $hobbies=$getData['hobbies'];
+            $typeName=$getData['type_name'];?>
         <tr>
             <td><?php echo $id?></td>
             <td><?php echo $username?></td>
@@ -187,7 +191,7 @@ li a:hover {
             <td><?php echo $age?></td>
             <td><?php echo $address?></td>
             <td><?php echo $hobbies?></td>
-            <td></td>
+            <td><?php echo $typeName?></td>
             <td>
                 <a href="edit.php?id=<?php echo $id ?>">Edit</a>
                 <a href="remove.php?id=<?php echo $id ?>">Remove</a>

@@ -1,4 +1,3 @@
-<h2>Update Member</h2>
 <?php require 'connectDB.php'; 
 $idEdit=$_GET["id"];
 
@@ -11,15 +10,17 @@ $idEdit=$_GET["id"];
     $hobbies1 = $_POST["hobbies1"];
     $hobbies2 = $_POST["hobbies2"];
     $hobbies3 = $_POST["hobbies3"];
+    $memberType = $_POST["memberType"];
 
-    $hobbies = $hobbies0." , ".$hobbies1." , ".$hobbies2." , ".$hobbies3;
+    $hobbies = $hobbies0.",".$hobbies1.",".$hobbies2.",".$hobbies3;
 
     $SQL = "UPDATE member SET username='$username',
         gender='$gender',
         age='$age',
         fullname='$fullname',
         address='$address',
-        hobbies='$hobbies'
+        hobbies='$hobbies',
+        type_id='$memberType'
         WHERE id=$idEdit"; 
         $query = $conn->query($SQL);
 
@@ -32,6 +33,8 @@ $idEdit=$_GET["id"];
         echo "FAILED".$conn->error();
         echo "<br> <a href='member_list.php'> back Member List </a>";
     }
+    
 
 
 ?>
+<h2>Update Member</h2>
