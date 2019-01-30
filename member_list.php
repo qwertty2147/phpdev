@@ -154,14 +154,7 @@ li a:hover {
   <article>
   <h2>Member List</h2><br>
     <hr>
-    <?php 
-  //select data from table
-    $sql= "SELECT member.*,member_type.type_name FROM member LEFT JOIN member_type ON (member.type_id = member_type.type_id) LIMIT 10 ";
-    $query = $conn->query($sql);
-    $row = $query->num_rows;
     
-    
-  ?>
     <table id="tab">
         <tr>
             <th>ID</th>
@@ -173,7 +166,26 @@ li a:hover {
             <th>Hobbies</th>
             <th>Member Type</th>
             <th>Manage</th>
-        </tr><?php 
+        </tr>
+        <?php 
+        $pagelen =2;
+        $page = $_GET['page'];
+        
+          if(empty($page)){
+            $page=1;
+          }
+          $SQL = "SELECT * FROM member";
+          $query =$conn->query($SQL);
+          $row = $query->num_rows;
+          $totalpage= ceil($row/$pagelen);
+          $goto=(($page-1)*$pagelen);
+
+          $SQL = "SELECT member.*,member_type.type_name
+          FROM member
+          LEFT JOIN member_type ON (member.type_id=member_type.type_id) LIMIT $goto,$pagelen";
+          $query = $conn->query($SQL);
+          $row = $query->num_rows;
+
         while ($getData = $query->fetch_assoc()){
             $id= $getData['id'];
             $username =$getData['username'];
@@ -200,7 +212,22 @@ li a:hover {
         </tr>
         <?php } ?>
     </table>
-    
+          <?php 
+          echo "&nbsp;[Page $page/$totalpage]";
+          echo "&nbsp;Goto; ";
+          if($page>1){
+            $back = $page-1;
+            echo "<a href=$PHP_SELF?page=1>First</a> |";
+            echo "<a href=$PHP_SELF?page=".$back."></a>";
+          }
+          for($i=1; $i<=$totalpage; $i++){
+            if($i == $page){
+              echo "[<b>$i</b>]";
+            }else{
+              echo "<a href=$PHP_SELF?page=$i> $i </a>";
+            }
+          }
+          ?>
     <div id="show">
     
   
